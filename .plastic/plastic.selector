@@ -1,3 +1,0 @@
-repository "My project@karkavin05@cloud"
-  path "/"
-    smartbranch "/main" changeset "5"
