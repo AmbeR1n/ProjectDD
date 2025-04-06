@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -42,8 +43,10 @@ public class DialogueManager : MonoBehaviour
         //_saveLoadService = saveLoadService;
     }
 
-    private void Awake() =>
+    private void Awake()
+    {
         _currentStory = new Story(_incJson.text);
+    }
 
     private Dictionary<string, int> _expressionIndexMapCharacter = new()
     {
@@ -178,5 +181,9 @@ public class DialogueManager : MonoBehaviour
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextSceneIndex <= SceneManager.sceneCount)
             SceneManager.LoadScene(nextSceneIndex);
+    }
+    public void EasterGagAdd(int gagIndex)
+    {
+        _currentStory.variablesState[$"easteregg_{gagIndex}"] = true; 
     }
 }

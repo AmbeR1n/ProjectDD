@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Novella.sln"
+    "dotnet.defaultSolution": "ProjectDD.sln"
 }
