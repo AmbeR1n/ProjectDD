@@ -1260,15 +1260,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858714260776051769, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.8490566
       objectReference: {fileID: 0}
     - target: {fileID: 1858714260776051769, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.8490566
       objectReference: {fileID: 0}
     - target: {fileID: 1858714260776051769, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.8490566
       objectReference: {fileID: 0}
     - target: {fileID: 1898469054886520750, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: characterName
@@ -1300,11 +1300,31 @@ PrefabInstance:
       objectReference: {fileID: 2829232388215122354, guid: f9a822ffa888cb04aa3aef3b5fcc89f6, type: 3}
     - target: {fileID: 2048851065777726023, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2971524709716863638, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204354891402787310, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204354891402787310, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204354891402787310, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204354891402787310, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3372856419432937674, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
+      propertyPath: m_TagString
+      value: IgnoreClick
       objectReference: {fileID: 0}
     - target: {fileID: 3549247103348125266, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_AnchoredPosition.x
