@@ -434,7 +434,7 @@
 ->END
 
 === stay_home_route ===
-{easteregg_1 and easteregg_2 and easteregg_3 and easteregg_4 and easteregg_5}
+{easteregg_0 and easteregg_1 and easteregg_2 and easteregg_3 and easteregg_4}
     -> secret_ending
 -else:
     -> normal_route

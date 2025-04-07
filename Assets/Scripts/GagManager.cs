@@ -39,6 +39,8 @@ public class GagManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gags.Count == 0) return;
+        
         if (randomTimer > 0)
         {
             randomTimer -= Time.deltaTime;
