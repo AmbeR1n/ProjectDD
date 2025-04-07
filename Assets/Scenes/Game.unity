@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 55066131}
   m_Layer: 5
   m_Name: Gag
-  m_TagString: Untagged
+  m_TagString: IgnoreClick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 222439827}
   m_Layer: 5
   m_Name: Gag (2)
-  m_TagString: Untagged
+  m_TagString: IgnoreClick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 1637847049}
   m_Layer: 5
   m_Name: Gag (3)
-  m_TagString: Untagged
+  m_TagString: IgnoreClick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1001,7 +1001,7 @@ GameObject:
   - component: {fileID: 1725855362}
   m_Layer: 5
   m_Name: Gag (4)
-  m_TagString: Untagged
+  m_TagString: IgnoreClick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 1941811890}
   m_Layer: 5
   m_Name: Gag (1)
-  m_TagString: Untagged
+  m_TagString: IgnoreClick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
