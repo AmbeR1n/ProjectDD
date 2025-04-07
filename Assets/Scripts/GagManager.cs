@@ -23,7 +23,6 @@ public class GagManager : MonoBehaviour
     {
         livingTimer = livingTime;
         GetRandomTime();
-
         var parentRect = transform.GetComponent<RectTransform>();
         yUp = parentRect.rect.height/2;
         yDown = -parentRect.rect.height/2;
@@ -40,7 +39,7 @@ public class GagManager : MonoBehaviour
     void Update()
     {
         if (gags.Count == 0) return;
-        
+
         if (randomTimer > 0)
         {
             randomTimer -= Time.deltaTime;
@@ -50,6 +49,7 @@ public class GagManager : MonoBehaviour
         if (currentGag == null)
         {
             GetRandomGag();
+            livingTimer = livingTime;
         }
 
         if (livingTimer > 0)
@@ -69,6 +69,7 @@ public class GagManager : MonoBehaviour
     {
         currentGagIndex = Random.Range(0, gags.Count);
         currentGag = gags[currentGagIndex];
+        
         currentGag.anchoredPosition = GetRandomXY();
         currentGag.gameObject.SetActive(true);
         currentGag.GetComponent<Button>().onClick.AddListener(GagClicked);
@@ -77,10 +78,12 @@ public class GagManager : MonoBehaviour
 
     private void GagClicked()
     {
-        OnEasterGagClick?.Invoke(currentGagIndex);
+        Debug.Log(currentGag.GetSiblingIndex());
+        OnEasterGagClick?.Invoke(currentGag.GetSiblingIndex());
         currentGag.GetComponent<Button>().onClick.RemoveAllListeners();
         gags.Remove(currentGag);
-        Destroy(currentGag.gameObject);
+        currentGag.gameObject.SetActive(false);
+        //Destroy(currentGag.gameObject);
         currentGag = null; // Set currentGag to null to allow for a new gag to be selected
         GetRandomTime();
         livingTime = 30f; // Reset the living time to 30 seconds
@@ -113,7 +116,7 @@ public class GagManager : MonoBehaviour
 
     void GetRandomTime()
     {
-        randomTimer = (float)Random.Range(3, 10);
+        randomTimer = (float)Random.Range(randomTimeMin, randomTimeMax);
     }
 
     void MoveGag()

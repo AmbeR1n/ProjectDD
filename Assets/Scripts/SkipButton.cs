@@ -17,7 +17,14 @@ public class SkipButton : MonoBehaviour
     {
         while (!_dialogueManager.ChoiceButtonsPanel.activeInHierarchy)
         {
-            _dialogueManager.ContinueStory(_dialogueManager.ChoiceButtonsPanel.activeInHierarchy);
+            if (_dialogueManager.CurrentStory.canContinue)
+            {
+                _dialogueManager.ContinueStory(_dialogueManager.DialoguePanel.activeInHierarchy);
+            }
+            else
+            {
+                break;
+            }
         }
     }
 }

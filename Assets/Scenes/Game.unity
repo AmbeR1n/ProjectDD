@@ -738,8 +738,8 @@ MonoBehaviour:
   - {fileID: 1725855359}
   tweenTime: 1
   livingTime: 10
-  randomTimeMin: 60
-  randomTimeMax: 300
+  randomTimeMin: 6
+  randomTimeMax: 12
   OnEasterGagClick:
     m_PersistentCalls:
       m_Calls:

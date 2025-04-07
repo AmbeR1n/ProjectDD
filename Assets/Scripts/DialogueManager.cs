@@ -80,8 +80,11 @@ public class DialogueManager : MonoBehaviour
         {
             ShowDialogue();
             ShowChoiceButton();
-            //Debug.Log($"Current character: { _currentStory.variablesState["CharacterName"]} with expression: {_currentStory.variablesState["CharacterExpression"]}");
-            //Debug.Log($"Current background: { _currentStory.variablesState["BG"]}");
+            Debug.Log($"Current easter egg 0 state: { _currentStory.variablesState["easteregg_0"]}");
+            Debug.Log($"Current easter egg 1 state: { _currentStory.variablesState["easteregg_1"]}");
+            Debug.Log($"Current easter egg 2 state: { _currentStory.variablesState["easteregg_2"]}");
+            Debug.Log($"Current easter egg 3 state: { _currentStory.variablesState["easteregg_3"]}");
+            Debug.Log($"Current easter egg 4 state: { _currentStory.variablesState["easteregg_4"]}");
         }
         else if (!choiceBefore)
             ExitDialogue();
@@ -158,9 +161,7 @@ public class DialogueManager : MonoBehaviour
 
     private void MovingNextScene()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextSceneIndex <= SceneManager.sceneCount)
-            SceneManager.LoadScene(nextSceneIndex);
+        SceneManager.LoadScene("Menu");
     }
     public void EasterGagAdd(int gagIndex)
     {
