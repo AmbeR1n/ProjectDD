@@ -87,7 +87,7 @@ namespace Ink.UnityIntegration {
 		public bool delayInPlayMode = true;
 		public bool handleJSONFilesAutomatically = true;
 
-		public int compileTimeout = 30;
+		public int compileTimeout = 120;
 		
 		public bool printInkLogsInConsoleOnCompile;
 		

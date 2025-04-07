@@ -162,7 +162,10 @@ public class DialogueManager : MonoBehaviour
         if (nextSceneIndex <= SceneManager.sceneCount)
             SceneManager.LoadScene(nextSceneIndex);
     }
-
+    public void EasterGagAdd(int gagIndex)
+    {
+        _currentStory.variablesState[$"easteregg_{gagIndex}"] = true; 
+    }
     public void UpdateDialogue()
     {
         _dialogueText.text = _currentStory.currentText;
