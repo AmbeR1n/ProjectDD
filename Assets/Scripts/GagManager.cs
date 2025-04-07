@@ -122,21 +122,12 @@ public class GagManager : MonoBehaviour
         {
             case GagPosition.Left:
                 currentGag.DOAnchorPosX(currentGag.anchoredPosition.x + width, tweenTime);
-                Debug.Log(currentGag.anchoredPosition.x);
-                Debug.Log(width);
-                Debug.Log(currentGag.anchoredPosition.x + width);
                 break;
             case GagPosition.Right:
                 currentGag.DOAnchorPosX(currentGag.anchoredPosition.x - width, tweenTime);
-                Debug.Log(currentGag.anchoredPosition.x);
-                Debug.Log(width);
-                Debug.Log(currentGag.anchoredPosition.x - width);
                 break;
             case GagPosition.Up:
                 currentGag.DOAnchorPosY(currentGag.anchoredPosition.y - height, tweenTime);
-                Debug.Log(currentGag.anchoredPosition.y);
-                Debug.Log(height);
-                Debug.Log(currentGag.anchoredPosition.y + height);
                 break;
             default:
                 break;

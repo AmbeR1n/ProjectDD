@@ -738,8 +738,8 @@ MonoBehaviour:
   - {fileID: 1725855359}
   tweenTime: 1
   livingTime: 10
-  randomTimeMin: 30
-  randomTimeMax: 60
+  randomTimeMin: 60
+  randomTimeMax: 300
   OnEasterGagClick:
     m_PersistentCalls:
       m_Calls:
@@ -866,10 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16e4e293f53ac849a50811ba46515a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSprites:
-  - {fileID: 7867802241722950305, guid: 5e906ba30c56b4f4bbd09a558d6663f6, type: 3}
-  - {fileID: 9180199550867594981, guid: bca3166d94ffb994bb7dfc639f281d6b, type: 3}
-  - {fileID: 677991189409001206, guid: c1b3dec269eb0f84792741301b34c3ec, type: 3}
+  backgroundSprites: []
 --- !u!1 &1637847045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,11 +1237,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 200112406428414028, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_text
-      value: 
+      value: Name
       objectReference: {fileID: 0}
     - target: {fileID: 200112406428414028, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 612225427103949215, guid: 24e50dcf54f4e0543bcf05ff00b62b4b, type: 3}
       propertyPath: DialoguePanel

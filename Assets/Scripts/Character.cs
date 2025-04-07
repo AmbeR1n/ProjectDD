@@ -14,11 +14,7 @@ public class Character : MonoBehaviour
     }
 
     public void ChangeEmotion(string characterName, string currentExpression)
-    {
-        bool isNameEmpty = string.IsNullOrWhiteSpace(characterName);
-
-        if (isNameEmpty) return;
-        
+    {   
         FindCharacterByName(characterName);
         FindEmotionByName(currentExpression);
         SetEmotion(_emotionSprite);
@@ -53,6 +49,12 @@ public class Character : MonoBehaviour
 
     private void FindCharacterByName(string characterName)
     {
+        if (string.IsNullOrWhiteSpace(characterName))
+        {
+            _currentCharacter = null;
+            return;
+        }
+        
         foreach (var character in _charactersArray)
         {
             if (character.characterName == characterName)
@@ -67,7 +69,7 @@ public class Character : MonoBehaviour
 
     private void FindEmotionByName(string expressionName)
     {
-        if (_currentCharacter == null)
+        if (_currentCharacter == null || string.IsNullOrWhiteSpace(expressionName))
         {
             _emotionSprite = null;
             return;
@@ -75,8 +77,8 @@ public class Character : MonoBehaviour
 
         foreach (var sprite in _currentCharacter.emotions)
         {
-            string name = sprite.name + "_0";
-            if (name == expressionName)
+            string name = expressionName + "_0";
+            if (sprite.name == name)
             {
                 _emotionSprite = sprite;
                 return;

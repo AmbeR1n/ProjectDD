@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Background : MonoBehaviour
 {
-    [SerializeField] private List<BackgroundSO> backgroundSprites;
+    [SerializeField] private List<Sprite> backgroundSprites;
     private Sprite _currentBackground;
 
     private void Start()
     {
-        backgroundSprites = Resources.LoadAll<BackgroundSO>("Backgrounds").ToList();
+        backgroundSprites = Resources.LoadAll<Sprite>("Backgrounds").ToList();
         
         if (backgroundSprites.Count == 0)
         {
@@ -42,13 +42,14 @@ public class Background : MonoBehaviour
     {
         foreach (var background in backgroundSprites)
         {
-            if (background.name == bgName)
+            string name = bgName + "_0";
+            if (background.name == name)
             {
-                _currentBackground = background.backgroundImage;
+                _currentBackground = background;
                 return;
             }
         }
-        Debug.LogWarning($"Background with name {bgName} not found.");
         _currentBackground = null;
+        Debug.LogWarning($"Background with name {bgName} not found.");
     }
 }

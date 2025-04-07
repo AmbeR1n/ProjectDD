@@ -80,8 +80,8 @@ public class DialogueManager : MonoBehaviour
         {
             ShowDialogue();
             ShowChoiceButton();
-            Debug.Log($"Current character: { _currentStory.variablesState["CharacterName"]} with expression: {_currentStory.variablesState["CharacterExpression"]}");
-            Debug.Log($"Current background: { _currentStory.variablesState["BG"]}");
+            //Debug.Log($"Current character: { _currentStory.variablesState["CharacterName"]} with expression: {_currentStory.variablesState["CharacterExpression"]}");
+            //Debug.Log($"Current background: { _currentStory.variablesState["BG"]}");
         }
         else if (!choiceBefore)
             ExitDialogue();
