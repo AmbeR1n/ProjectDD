@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: "\u041C\u0430\u043A\u0438"
   emotions:
-  - {fileID: 180603406025771804, guid: 24914ab5138c6864dba5343b05d81e2a, type: 3}
-  - {fileID: -3156449090682667195, guid: 3af74becab4872d49ae90fbef57e6c70, type: 3}
-  - {fileID: 2829232388215122354, guid: f9a822ffa888cb04aa3aef3b5fcc89f6, type: 3}
+  - {fileID: 7170363685903903247, guid: deb628fa2301a9648ac0096ecc8f2994, type: 3}
+  - {fileID: 8380713112942801787, guid: 3bd7d31c0e283d44c91c8582568de639, type: 3}
+  - {fileID: -6957276714191707034, guid: 5c217ee50fbf12347ad4b1f45f79d417, type: 3}
+  - {fileID: 7960423187575122627, guid: bfd49781055d7754da9d82af21847d80, type: 3}
+  - {fileID: 4745025343501594420, guid: b3103a6f5c6be9c42bb30f6134b05ab9, type: 3}

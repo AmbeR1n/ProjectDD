@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f2658cf693fae4799cda08ee0a0b19, type: 3}
+  m_Name: Waiter
+  m_EditorClassIdentifier: 
+  characterName: "\u041E\u0444\u0438\u0446\u0438\u0430\u043D\u0442"
+  emotions:
+  - {fileID: -5712880088287387182, guid: 77470ec2886572d46a700dc19e2945ae, type: 3}

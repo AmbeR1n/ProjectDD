@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f2658cf693fae4799cda08ee0a0b19, type: 3}
+  m_Name: Aigis
+  m_EditorClassIdentifier: 
+  characterName: "\u0410\u0438\u0433\u0438\u0441"
+  emotions:
+  - {fileID: 7711978609344129607, guid: 21381d9b2bb4dc64982cbab4b7a88e3b, type: 3}
+  - {fileID: 3472322158629158240, guid: bea1dfce26319be4b8758b0f5cdb559b, type: 3}
+  - {fileID: -4167194297409391730, guid: 26d6a9d485bb3af4094b7964b83985b1, type: 3}
+  - {fileID: 2350350489840273368, guid: b7aaccd63d541014b98d08595b699683, type: 3}
+  - {fileID: -1809813078972207019, guid: 847427fa1c8138940b7edf1cea74cfa7, type: 3}

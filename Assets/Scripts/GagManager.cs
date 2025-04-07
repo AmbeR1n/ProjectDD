@@ -7,22 +7,29 @@ using UnityEngine.Events;
 public class GagManager : MonoBehaviour
 {
     [SerializeField] private List<RectTransform> gags = new();
-    [SerializeField] private readonly float tweenTime = 1f;
+    [SerializeField] private float tweenTime = 1f;
+    [SerializeField] private float livingTime;
+    [SerializeField] private float randomTimeMin;
+    [SerializeField] private float randomTimeMax;
     private GagPosition gagPosition;
-    private float xLeft, xRight, y;
+    private float xLeft, xRight, yDown, yUp;
     private RectTransform currentGag;
     private int currentGagIndex;
-    private float randomTime;
-    private float livingTime;
-    public UnityEvent<int> OnEasterGagClick;
+    private float randomTimer;
+    private float livingTimer;
+    [SerializeField] private UnityEvent<int> OnEasterGagClick;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        livingTimer = livingTime;
         GetRandomTime();
-        livingTime = 30f; // Set the living time to 30 seconds
-        y = Screen.height; // Set the y position to be above the screen height
-        xLeft = 0; // Set the left x position to be 0
-        xRight = Screen.width; // Set the right x position to be the screen width
+
+        var parentRect = transform.GetComponent<RectTransform>();
+        yUp = parentRect.rect.height/2;
+        yDown = -parentRect.rect.height/2;
+        xRight = parentRect.rect.width/2;
+        xLeft = -parentRect.rect.width/2;
+        
         foreach (var gag in gags)
         {
             gag.gameObject.SetActive(false);
@@ -32,67 +39,71 @@ public class GagManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (randomTime > 0)
+        if (randomTimer > 0)
         {
-            randomTime -= Time.deltaTime;
+            randomTimer -= Time.deltaTime;
+            return;
         }
-        else
+
+        if (currentGag == null)
         {
-            if (currentGag == null || !currentGag.gameObject.activeSelf)
-            {
-                GetRandomGag();
-            }
-            else
-            {
-                livingTime -= Time.deltaTime;
-                if (livingTime <= 0)
-                {
-                    currentGag.gameObject.SetActive(false);
-                    currentGag.GetComponent<Button>().onClick.RemoveAllListeners();
-                    livingTime = 30f; // Reset the living time to 30 seconds
-                    GetRandomTime();
-                    currentGag = null; // Set currentGag to null to allow for a new gag to be selected
-                }
-            }
+            GetRandomGag();
         }
+
+        if (livingTimer > 0)
+        {
+            livingTimer -= Time.deltaTime;
+            return;
+        }
+
+        currentGag.gameObject.SetActive(false);
+        currentGag.GetComponent<Button>().onClick.RemoveAllListeners();
+        livingTimer = livingTime; // Reset the living timer to living time
+        GetRandomTime();
+        currentGag = null; // Set currentGag to null to allow for a new gag to be selected
     }
 
     private void GetRandomGag()
     {
         currentGagIndex = Random.Range(0, gags.Count);
         currentGag = gags[currentGagIndex];
-        currentGag.transform.position = GetRandomXY();
-        MoveGag();
+        currentGag.anchoredPosition = GetRandomXY();
         currentGag.gameObject.SetActive(true);
-        currentGag.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            OnEasterGagClick?.Invoke(currentGagIndex);
-            currentGag.GetComponent<Button>().onClick.RemoveAllListeners();
-            gags.Remove(currentGag);
-            Destroy(currentGag.gameObject);
-            currentGag = null; // Set currentGag to null to allow for a new gag to be selected
-            GetRandomTime();
-            livingTime = 30f; // Reset the living time to 30 seconds
-        });
+        currentGag.GetComponent<Button>().onClick.AddListener(GagClicked);
+        MoveGag();
     }
+
+    private void GagClicked()
+    {
+        OnEasterGagClick?.Invoke(currentGagIndex);
+        currentGag.GetComponent<Button>().onClick.RemoveAllListeners();
+        gags.Remove(currentGag);
+        Destroy(currentGag.gameObject);
+        currentGag = null; // Set currentGag to null to allow for a new gag to be selected
+        GetRandomTime();
+        livingTime = 30f; // Reset the living time to 30 seconds
+    }
+
     Vector3 GetRandomXY()
     {
-        float newX = Random.Range(xLeft-currentGag.rect.width/2, xRight + currentGag.rect.width/2);
-        float newY = Random.Range(280 + currentGag.rect.height, y+currentGag.rect.height/2);
-        if (newY > y-currentGag.rect.height/2-50)
+        float width = currentGag.rect.width * currentGag.localScale.x;
+        float height = currentGag.rect.height * currentGag.localScale.y;
+        float newX = Random.Range(xLeft + width/2, xRight - width/2);
+        float newY = Random.Range(yDown + height/2, yUp + height/2);
+        if (newY > yUp-height/2-10)
         {
-            newY = y + currentGag.rect.height;
+            newY = yUp + height/2;
             gagPosition = GagPosition.Up;
             return new Vector3(newX, newY, 0);
         }
         if (Random.Range(0, 99) < 50)
         {
-            newX = xLeft - currentGag.rect.width/2;
+            newX = xLeft - width/2;
             gagPosition = GagPosition.Left;
         }
         else
         {
-            newX = xRight + currentGag.rect.width/2;
+            newX = xRight + width/2;
             gagPosition = GagPosition.Right;
         }
         return new Vector3(newX, newY, 0);
@@ -100,21 +111,32 @@ public class GagManager : MonoBehaviour
 
     void GetRandomTime()
     {
-        randomTime = (float)Random.Range(30, 60);
+        randomTimer = (float)Random.Range(3, 10);
     }
 
     void MoveGag()
     {
+        float width = currentGag.rect.width * currentGag.localScale.x;
+        float height = currentGag.rect.height * currentGag.localScale.y;
         switch (gagPosition)
         {
             case GagPosition.Left:
-                currentGag.transform.DOMoveX(currentGag.transform.position.x + currentGag.rect.width, tweenTime);
+                currentGag.DOAnchorPosX(currentGag.anchoredPosition.x + width, tweenTime);
+                Debug.Log(currentGag.anchoredPosition.x);
+                Debug.Log(width);
+                Debug.Log(currentGag.anchoredPosition.x + width);
                 break;
             case GagPosition.Right:
-                currentGag.transform.DOMoveX(currentGag.transform.position.x - currentGag.rect.width, tweenTime);
+                currentGag.DOAnchorPosX(currentGag.anchoredPosition.x - width, tweenTime);
+                Debug.Log(currentGag.anchoredPosition.x);
+                Debug.Log(width);
+                Debug.Log(currentGag.anchoredPosition.x - width);
                 break;
             case GagPosition.Up:
-                currentGag.transform.DOMoveY(currentGag.transform.position.y - currentGag.rect.height, tweenTime);
+                currentGag.DOAnchorPosY(currentGag.anchoredPosition.y - height, tweenTime);
+                Debug.Log(currentGag.anchoredPosition.y);
+                Debug.Log(height);
+                Debug.Log(currentGag.anchoredPosition.y + height);
                 break;
             default:
                 break;

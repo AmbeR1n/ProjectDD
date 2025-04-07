@@ -75,7 +75,8 @@ public class Character : MonoBehaviour
 
         foreach (var sprite in _currentCharacter.emotions)
         {
-            if (sprite.name == expressionName)
+            string name = sprite.name + "_0";
+            if (name == expressionName)
             {
                 _emotionSprite = sprite;
                 return;
