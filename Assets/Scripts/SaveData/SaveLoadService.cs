@@ -24,6 +24,7 @@ public class SaveLoadService : ISaveLoadService
         {
             _jsonData = PlayerPrefs.GetString(dialogueProgressKey);
             _dialogueManager.CurrentStory.state.LoadJson(_jsonData);
+            _dialogueManager.UpdateDialogue();
         }
     }
 }

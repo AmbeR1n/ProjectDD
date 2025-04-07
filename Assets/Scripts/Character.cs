@@ -1,26 +1,46 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-    public List<Sprite> emotions;
-    public string characterName;
+    private CharacterSO[] _charactersArray;
 
-    public void ChangeEmotion(string currentExpression)
+    private CharacterSO _currentCharacter;
+    private Sprite _emotionSprite;
+
+    private void Start()
     {
-        foreach (var sprite in emotions)
-        {
-            if (sprite.name == currentExpression)
-            {
-                SetEmotion(sprite);
-                return;
-            }
-        }
-        Debug.LogWarning($"Expression with name {currentExpression} not found.");
+        _charactersArray = Resources.LoadAll<CharacterSO>("Characters");
     }
 
-    public void SetTransparent(bool isTransparent)
+    public void ChangeEmotion(string characterName, string currentExpression)
+    {
+        bool isNameEmpty = string.IsNullOrWhiteSpace(characterName);
+
+        if (isNameEmpty) return;
+        
+        FindCharacterByName(characterName);
+        FindEmotionByName(currentExpression);
+        SetEmotion(_emotionSprite);
+    }
+
+    private void SetEmotion(Sprite sprite)
+    {
+        if (sprite == null)
+        {
+            SetTransparent(true);
+            return;
+        }
+
+        var image = GetComponent<Image>();
+        if (image != null)
+        {
+            image.sprite = sprite;
+            SetTransparent(false);
+        }
+    }
+
+    private void SetTransparent(bool isTransparent)
     {
         var image = GetComponent<Image>();
         if (image != null)
@@ -31,16 +51,37 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void SetEmotion(Sprite sprite)
+    private void FindCharacterByName(string characterName)
     {
-        Image image = GetComponent<Image>();
-        if (image != null)
+        foreach (var character in _charactersArray)
         {
-            image.sprite = sprite;
+            if (character.characterName == characterName)
+            {
+                _currentCharacter = character;
+                return;
+            }
         }
-        else
+        Debug.LogWarning($"Character with name {characterName} not found.");
+        _currentCharacter = null;
+    }
+
+    private void FindEmotionByName(string expressionName)
+    {
+        if (_currentCharacter == null)
         {
-            Debug.LogError("Image component not found on the GameObject.");
+            _emotionSprite = null;
+            return;
         }
+
+        foreach (var sprite in _currentCharacter.emotions)
+        {
+            if (sprite.name == expressionName)
+            {
+                _emotionSprite = sprite;
+                return;
+            }
+        }
+        Debug.LogWarning($"Expression with name {expressionName} not found.");
+        _emotionSprite = null;
     }
 }

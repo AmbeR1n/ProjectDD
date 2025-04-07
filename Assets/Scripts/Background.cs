@@ -1,33 +1,54 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Background : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> backgroundSprites;
+    [SerializeField] private List<BackgroundSO> backgroundSprites;
+    private Sprite _currentBackground;
 
-    public void ChangeBG(string bgName)
+    private void Start()
     {
-        foreach (var sprite in backgroundSprites)
+        backgroundSprites = Resources.LoadAll<BackgroundSO>("Backgrounds").ToList();
+        
+        if (backgroundSprites.Count == 0)
         {
-            if (sprite.name == bgName)
-            {
-                SetBackground(sprite);
-                return;
-            }
-        }
-        Debug.LogWarning($"Background with name {bgName} not found.");
+            Debug.LogError("No background sprites found in Resources/Backgrounds.");
+            return;
+        }   
     }
+    
+    public void ChangeBackground(string bgName)
+    {
+        FindBackgroundByName(bgName);
+        SetBackground(_currentBackground);
+    }
+
     private void SetBackground(Sprite sprite)
     {
+        if (sprite == null) return;
+
         Image image = GetComponent<Image>();
         if (image != null)
         {
             image.sprite = sprite;
+            return;
         }
-        else
+        Debug.LogError("Image component not found on the GameObject.");
+    }
+
+    private void FindBackgroundByName(string bgName)
+    {
+        foreach (var background in backgroundSprites)
         {
-            Debug.LogError("Image component not found on the GameObject.");
+            if (background.name == bgName)
+            {
+                _currentBackground = background.backgroundImage;
+                return;
+            }
         }
+        Debug.LogWarning($"Background with name {bgName} not found.");
+        _currentBackground = null;
     }
 }

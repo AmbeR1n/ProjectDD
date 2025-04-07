@@ -16,20 +16,21 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialoguePanel;
     public TextMeshProUGUI DialogueText;
     public TextMeshProUGUI NameText;
+    public GameObject NameParent;
     public GameObject ChoiceButtonsPanel;
 
     private Story _currentStory;
     private Background _currentBackground;
+    private Character _currentCharacter;
+
     private TextAsset _incJson;
     private TextMeshProUGUI _dialogueText;
     private GameObject _choiceButton;
-    //private SaveLoadService _saveLoadService;
 
     private List<TextMeshProUGUI> _choiceButtonText = new();
-    private List<Character> _characters = new();
 
     [Inject]
-    public void Construct(DialogueInstaller dialogueInstaller)//, SaveLoadService saveLoadService)
+    public void Construct(DialogueInstaller dialogueInstaller)
     {
         DialoguePanel = dialogueInstaller.DialoguePanel;
         _dialogueText = dialogueInstaller.DialogueText;
@@ -39,34 +40,26 @@ public class DialogueManager : MonoBehaviour
         _choiceButton = dialogueInstaller.ChoiceButton;
 
         _incJson = dialogueInstaller.IncJson;
-        //_saveLoadService = saveLoadService;
     }
 
-    private void Awake() =>
-        _currentStory = new Story(_incJson.text);
-
-    private Dictionary<string, int> _expressionIndexMapCharacter = new()
+    private void Awake()
     {
-        { "tol_1", 0 },
-        { "tol_2", 1 },
-        { "mak_1", 2 },
-        { "mak_2", 3 },
-        { "mak_3", 4 },
-    };
+        _currentStory = new Story(_incJson.text);
+        NameParent = NameText.transform.parent.gameObject;
+        NameParent.SetActive(false);
+        DialoguePanel.SetActive(false);
+    }
 
     void Start()
     {
         _currentBackground = FindFirstObjectByType<Background>();
-
-        foreach (var character in FindObjectsByType<Character>(FindObjectsSortMode.None))
-            _characters.Add(character);
+        _currentCharacter = FindFirstObjectByType<Character>();
 
         StartDialogue();
     }
 
     public void StartDialogue()
     {
-        //_saveLoadService.LoadData();
 
         DialogPlay = true;
         DialoguePanel.SetActive(true);
@@ -87,6 +80,8 @@ public class DialogueManager : MonoBehaviour
         {
             ShowDialogue();
             ShowChoiceButton();
+            Debug.Log($"Current character: { _currentStory.variablesState["CharacterName"]} with expression: {_currentStory.variablesState["CharacterExpression"]}");
+            Debug.Log($"Current background: { _currentStory.variablesState["BG"]}");
         }
         else if (!choiceBefore)
             ExitDialogue();
@@ -95,7 +90,6 @@ public class DialogueManager : MonoBehaviour
     private void ShowDialogue()
     {
         _dialogueText.text = _currentStory.Continue();
-        //_saveLoadService.SaveData();
         ChangeCharacter();
         ChangeBackground();
     }
@@ -105,29 +99,18 @@ public class DialogueManager : MonoBehaviour
         string characterName = (string)_currentStory.variablesState["CharacterName"];
         string expressionName = (string)_currentStory.variablesState["CharacterExpression"];
 
-        NameText.text = characterName;
-        var index = _characters.FindIndex(character => character.characterName.Contains(characterName));
+        _currentCharacter.ChangeEmotion(characterName, expressionName);
 
-        if (index != -1)
-        {
-            if (string.IsNullOrEmpty(expressionName))
-                _characters[index].SetTransparent(true);
-            else if (_expressionIndexMapCharacter.TryGetValue(expressionName, out int expressionIndex))
-            {
-                _characters[index].SetTransparent(false);
-                _characters[index].ChangeEmotion(expressionName);
-            }
-            else
-                Debug.LogWarning($"��������� '{expressionName}' �� ������� � �������!");
-        }
+        NameText.text = characterName;
+
+        NameParent.SetActive(!string.IsNullOrWhiteSpace(characterName));
     }
 
     private void ChangeBackground()
     {
-        var bgKey = (string)_currentStory.variablesState["BG"];
-        _currentBackground.ChangeBG(bgKey);
+        var backgroundName = (string)_currentStory.variablesState["BG"];
+        _currentBackground.ChangeBackground(backgroundName);
     }
-
 
     private void ShowChoiceButton()
     {
@@ -178,5 +161,13 @@ public class DialogueManager : MonoBehaviour
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextSceneIndex <= SceneManager.sceneCount)
             SceneManager.LoadScene(nextSceneIndex);
+    }
+
+    public void UpdateDialogue()
+    {
+        _dialogueText.text = _currentStory.currentText;
+        ChangeCharacter();
+        ChangeBackground();
+        ShowChoiceButton();
     }
 }

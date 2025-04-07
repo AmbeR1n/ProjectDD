@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f2658cf693fae4799cda08ee0a0b19, type: 3}
+  m_Name: ToliBi
+  m_EditorClassIdentifier: 
+  characterName: "\u0422\u043E\u043B\u0438\u0431\u0438"
+  emotions:
+  - {fileID: 5587712068229705209, guid: eeadbdcbe9a242a4bb50f4d3fe3c7eae, type: 3}
+  - {fileID: 3451613713840540774, guid: c342ee1690472ee4681507acbcc72346, type: 3}

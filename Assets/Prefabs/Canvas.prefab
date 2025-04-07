@@ -223,6 +223,7 @@ MonoBehaviour:
   DialoguePanel: {fileID: 6338216214739907789}
   DialogueText: {fileID: 1697004387514275259}
   NameText: {fileID: 200112406428414028}
+  NameParent: {fileID: 0}
   ChoiceButtonsPanel: {fileID: 3372856419432937674}
 --- !u!1 &8751839986096738610
 GameObject:
@@ -312,13 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0c2c3076892e94390a56b2e5512ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emotions:
-  - {fileID: -3156449090682667195, guid: 3af74becab4872d49ae90fbef57e6c70, type: 3}
-  - {fileID: 3451613713840540774, guid: c342ee1690472ee4681507acbcc72346, type: 3}
-  - {fileID: 5587712068229705209, guid: eeadbdcbe9a242a4bb50f4d3fe3c7eae, type: 3}
-  - {fileID: 180603406025771804, guid: 24914ab5138c6864dba5343b05d81e2a, type: 3}
-  - {fileID: 2829232388215122354, guid: f9a822ffa888cb04aa3aef3b5fcc89f6, type: 3}
-  characterName: Strelock
 --- !u!1 &9186489365067604630
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2334055713177752689, guid: 09706401c29bf074fa497518c69eba1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 406
+      value: 258
       objectReference: {fileID: 0}
     - target: {fileID: 4901619580548545111, guid: 09706401c29bf074fa497518c69eba1c, type: 3}
       propertyPath: m_Pivot.x
@@ -525,6 +519,10 @@ PrefabInstance:
     - target: {fileID: 6822140501960362538, guid: 09706401c29bf074fa497518c69eba1c, type: 3}
       propertyPath: m_Name
       value: DialoguePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371466649497564073, guid: 09706401c29bf074fa497518c69eba1c, type: 3}
+      propertyPath: m_text
+      value: "\u0412 \u043C\u0435\u043D\u044E"
       objectReference: {fileID: 0}
     - target: {fileID: 8759774893982452606, guid: 09706401c29bf074fa497518c69eba1c, type: 3}
       propertyPath: m_AnchorMax.y
